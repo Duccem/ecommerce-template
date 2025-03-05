@@ -1,3 +1,4 @@
+import { Nunito } from 'next/font/google'
 import React from 'react'
 import './globals.css'
 
@@ -6,12 +7,19 @@ export const metadata = {
   title: 'Payload Blank Template',
 }
 
+const nunito = Nunito({
+  subsets: ['latin'],
+})
+
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body
+        suppressHydrationWarning
+        className={`${nunito.className} antialiased box-border relative`}
+      >
         <main>{children}</main>
       </body>
     </html>
