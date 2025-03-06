@@ -15,7 +15,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/libs/ui/components/ui/carousel'
-import { Sheet, SheetContent, SheetTrigger } from '@/libs/ui/components/ui/sheet'
+import { Separator } from '@/libs/ui/components/ui/separator'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/libs/ui/components/ui/sheet'
 import ShoppingCart from '@/modules/cart/components/shipping-cart'
 import type { CartItem } from '@/modules/cart/types/cart-item'
 import ProductCard from '@/modules/products/components/product-card'
@@ -92,6 +99,15 @@ export default function HomePage() {
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-full sm:max-w-md">
+                <SheetHeader className="py-4">
+                  <SheetTitle className="text-xl font-bold">Tu Carrito</SheetTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {cart.length === 0
+                      ? 'Tu carrito está vacío'
+                      : `${cart.length} ${cart.length === 1 ? 'producto' : 'productos'} en tu carrito`}
+                  </p>
+                </SheetHeader>
+                <Separator />
                 <ShoppingCart
                   cart={cart}
                   removeFromCart={removeFromCart}

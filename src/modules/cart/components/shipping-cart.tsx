@@ -2,8 +2,10 @@ import { Badge } from '@/libs/ui/components/ui/badge'
 import { Button } from '@/libs/ui/components/ui/button'
 import { ScrollArea } from '@/libs/ui/components/ui/scroll-area'
 import { Separator } from '@/libs/ui/components/ui/separator'
+import { SheetFooter } from '@/libs/ui/components/ui/sheet'
 import { Minus, Plus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import type { CartItem } from '../types/cart-item'
 
 interface ShoppingCartProps {
@@ -19,20 +21,9 @@ export default function ShoppingCart({ cart, removeFromCart, updateQuantity }: S
 
   return (
     <div className="flex flex-col h-full">
-      <div className="py-4">
-        <h2 className="text-xl font-bold">Tu Carrito</h2>
-        <p className="text-sm text-muted-foreground">
-          {cart.length === 0
-            ? 'Tu carrito está vacío'
-            : `${cart.length} ${cart.length === 1 ? 'producto' : 'productos'} en tu carrito`}
-        </p>
-      </div>
-
-      <Separator />
-
       {cart.length > 0 ? (
         <>
-          <ScrollArea className="flex-1 py-4">
+          <ScrollArea className="flex-1 p-4">
             <div className="space-y-4">
               {cart.map((item) => (
                 <div key={item.id} className="flex gap-4">
@@ -94,7 +85,7 @@ export default function ShoppingCart({ cart, removeFromCart, updateQuantity }: S
 
           <div className="pt-4 space-y-4">
             <Separator />
-            <div className="space-y-1.5">
+            <SheetFooter className="space-y-1.5">
               <div className="flex justify-between">
                 <span className="text-sm">Subtotal</span>
                 <span className="text-sm font-medium">${subtotal.toFixed(2)}</span>
@@ -107,8 +98,10 @@ export default function ShoppingCart({ cart, removeFromCart, updateQuantity }: S
                 <span>Total</span>
                 <span>${total.toFixed(2)}</span>
               </div>
-            </div>
-            <Button className="w-full">Proceder al pago</Button>
+              <Link href="/checkout">
+                <Button className="w-full">Proceder al pago</Button>
+              </Link>
+            </SheetFooter>
           </div>
         </>
       ) : (
